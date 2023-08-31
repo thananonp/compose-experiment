@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/onboardingFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.thananonp.composeexperiment.HomeFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.thananonp.composeexperiment.LoginFragment"
+        android:label="Login">
+        <action
+            android:id="@+id/action_login_fragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.thananonp.composeexperiment.OnboardingFragment"
+        android:label="Onboarding">
+        <action
+            android:id="@+id/action_onboardingFragment_to_login_fragment"
+            app:destination="@id/login_fragment" />
+    </fragment>
+</navigation>
