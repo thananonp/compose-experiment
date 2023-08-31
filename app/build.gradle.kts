@@ -59,6 +59,9 @@ dependencies {
     // Choose one of the following:
     // Material Design 3
     implementation("androidx.compose.material3:material3")
+    // Needed for bottom navigation bar
+    implementation("androidx.compose.material:material:1.5.0")
+
     // Android Studio Preview support
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")
