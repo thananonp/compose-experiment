@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.thananonp.composeexperiment.HomeFragment"
-        android:label="Home" />
+        android:label="Home" >
+        <action
+            android:id="@+id/action_homeFragment_to_formFragment"
+            app:destination="@id/formFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/login_fragment"
@@ -27,5 +31,13 @@
         <action
             android:id="@+id/action_onboardingFragment_to_login_fragment"
             app:destination="@id/login_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/formFragment"
+        android:name="com.thananonp.composeexperiment.FormFragment"
+        android:label="FormFragment" >
+        <action
+            android:id="@+id/action_formFragment_self"
+            app:destination="@id/formFragment" />
     </fragment>
 </navigation>

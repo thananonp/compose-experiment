@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
 
 sealed class BottomNavigationScreens(val id: Int, val name: String, val icon: ImageVector) {
     object Home : BottomNavigationScreens(R.id.homeFragment, "Home", Icons.Filled.Home)
-    object Wallet : BottomNavigationScreens(R.id.login_fragment, "Wallet", Icons.Filled.ShoppingCart)
+    object Form : BottomNavigationScreens(R.id.formFragment, "Form", Icons.Filled.ShoppingCart)
     object Notifications :
         BottomNavigationScreens(R.id.onboardingFragment, "Notifications", Icons.Filled.Notifications)
 
@@ -63,7 +63,7 @@ fun MainBottomNavigationBar(
 ) {
     val bottomItems = listOf(
         BottomNavigationScreens.Home,
-        BottomNavigationScreens.Wallet,
+        BottomNavigationScreens.Form,
         BottomNavigationScreens.Notifications,
         BottomNavigationScreens.More
     )
