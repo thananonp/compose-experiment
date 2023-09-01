@@ -1,6 +1,9 @@
 package com.thananonp.composeexperiment.allblogs
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
@@ -21,18 +25,25 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.thananonp.composeexperiment.MainActivity
 import com.thananonp.composeexperiment.MyApplication
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.thananonp.composeexperiment.R
 
 class AllBlogsFragment : Fragment(), AllBlogsViewDelegate {
-    private val viewModel = AllBlogsViewModel(MyApplication.appModule.allBlogsService, this)
+    private val viewModel: AllBlogsViewModel by viewModels {
+        AllBlogsViewModel.factory(
+            MyApplication.appModule.allBlogsService, this
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        super.onCreateView(inflater, container, savedInstanceState)
+        Log.d("ViewModel", "Fragment Created ${this.id}")
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
@@ -42,15 +53,24 @@ class AllBlogsFragment : Fragment(), AllBlogsViewDelegate {
     }
 
     override fun didClickBlog(blog: Blog) {
-        Toast.makeText(requireContext(), blog.title, Toast.LENGTH_LONG).show()
-        findNavController().navigate(AllBlogsFragmentDirections.actionAllBlogsFragmentToBlogDetailFragment(blog))
+        findNavController().navigate(
+            AllBlogsFragmentDirections.actionAllBlogsFragmentToBlogDetailFragment(
+                blog
+            )
+        )
     }
 }
 
 @Composable
 fun AllBlogsView(viewModel: AllBlogsViewModel) {
+    var hasAppeared by rememberSaveable {
+        mutableStateOf(false)
+    }
     LaunchedEffect(key1 = "Init", block = {
-        viewModel.getAllBlogs()
+        if (!hasAppeared) {
+            viewModel.getAllBlogs()
+            hasAppeared = true
+        }
     })
 
     Column {
@@ -64,7 +84,10 @@ fun AllBlogsView(viewModel: AllBlogsViewModel) {
         } else {
             viewModel.data.forEach { blog ->
                 Column {
-                    Button({ viewModel.didClickBlog(blog) }) {
+                    Button({
+                        viewModel.didClickBlog(blog)
+
+                    }) {
                         Card {
                             Text(text = blog.title, fontWeight = FontWeight.Bold, fontSize = 20.sp)
                             Text(text = blog.description)
