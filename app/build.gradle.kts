@@ -97,4 +97,7 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:$navVersion")
+
+//    implementation("androidx.fragment:fragment-ktx:1.6.1")
+
 }

@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_homeFragment_to_formFragment"
             app:destination="@id/formFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_allBlogsFragment"
+            app:destination="@id/allBlogsFragment" />
     </fragment>
 
     <fragment
@@ -40,4 +43,8 @@
             android:id="@+id/action_formFragment_self"
             app:destination="@id/formFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/allBlogsFragment"
+        android:name="com.thananonp.composeexperiment.allblogs.AllBlogsFragment"
+        android:label="AllBlogsFragment" />
 </navigation>

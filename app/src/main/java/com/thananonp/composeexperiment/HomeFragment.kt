@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -40,8 +41,12 @@ class HomeFragment : Fragment() {
                 Scaffold(bottomBar = {
                     MainBottomNavigationBar(findNavController())
                 }) {
-                    Box(modifier = Modifier.padding(it))
-                    { Text("Home View", color = Color.White) }
+                    Box(modifier = Modifier.padding(it)) {
+                        Text("Home View", color = Color.White)
+                        Button(onClick = { findNavController().navigate(R.id.action_homeFragment_to_allBlogsFragment) }) {
+                            Text(text = "Go to blog")
+                        }
+                    }
                 }
             }
         }
@@ -51,8 +56,9 @@ class HomeFragment : Fragment() {
 sealed class BottomNavigationScreens(val id: Int, val name: String, val icon: ImageVector) {
     object Home : BottomNavigationScreens(R.id.homeFragment, "Home", Icons.Filled.Home)
     object Form : BottomNavigationScreens(R.id.formFragment, "Form", Icons.Filled.ShoppingCart)
-    object Notifications :
-        BottomNavigationScreens(R.id.onboardingFragment, "Notifications", Icons.Filled.Notifications)
+    object Notifications : BottomNavigationScreens(
+        R.id.onboardingFragment, "Notifications", Icons.Filled.Notifications
+    )
 
     object More : BottomNavigationScreens(R.id.homeFragment, "More", Icons.Filled.Menu)
 }
@@ -72,8 +78,11 @@ fun MainBottomNavigationBar(
         val currentDestination = navBackStackEntry?.destination
 
         bottomItems.forEach { screen ->
-            BottomNavigationItem(
-                icon = { Icon(imageVector = screen.icon, contentDescription = null) },
+            BottomNavigationItem(icon = {
+                Icon(
+                    imageVector = screen.icon, contentDescription = null
+                )
+            },
                 label = { Text(text = screen.name) },
                 selected = currentDestination?.hierarchy?.any { it.id == screen.id } == true,
                 onClick = {
