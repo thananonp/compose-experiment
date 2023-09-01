@@ -1,5 +1,6 @@
 package com.thananonp.composeexperiment.allblogs
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -15,7 +16,13 @@ class AllBlogsViewModel(
     var error by mutableStateOf<Error?>(null)
     var data by mutableStateOf<List<Blog>>(listOf())
 
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("ViewModel", "Cleared")
+    }
+
     fun getAllBlogs() {
+        Log.d("ViewModel", "Blogs")
         viewModelScope.launch {
             isLoading = true
             error = null

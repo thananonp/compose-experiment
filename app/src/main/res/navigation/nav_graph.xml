@@ -46,5 +46,17 @@
     <fragment
         android:id="@+id/allBlogsFragment"
         android:name="com.thananonp.composeexperiment.allblogs.AllBlogsFragment"
-        android:label="AllBlogsFragment" />
+        android:label="AllBlogsFragment" >
+        <action
+            android:id="@+id/action_allBlogsFragment_to_blogDetailFragment"
+            app:destination="@id/blogDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blogDetailFragment"
+        android:name="com.thananonp.composeexperiment.blogdetail.BlogDetailFragment"
+        android:label="BlogDetailFragment" >
+        <argument
+            android:name="Blog"
+            app:argType="com.thananonp.composeexperiment.allblogs.Blog" />
+    </fragment>
 </navigation>

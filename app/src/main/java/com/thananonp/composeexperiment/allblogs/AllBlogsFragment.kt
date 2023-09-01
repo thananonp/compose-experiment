@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.thananonp.composeexperiment.MyApplication
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -42,6 +43,7 @@ class AllBlogsFragment : Fragment(), AllBlogsViewDelegate {
 
     override fun didClickBlog(blog: Blog) {
         Toast.makeText(requireContext(), blog.title, Toast.LENGTH_LONG).show()
+        findNavController().navigate(AllBlogsFragmentDirections.actionAllBlogsFragmentToBlogDetailFragment(blog))
     }
 }
 
