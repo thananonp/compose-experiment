@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("shot")
 }
 
 android {
@@ -16,7 +17,12 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.karumi.shot.ShotTestRunner"
+        testApplicationId = "com.thananonp.composeexperiment.test"
+    }
+
+    shot {
+        applicationId = "com.thananonp.composeexperiment"
     }
 
     buildTypes {

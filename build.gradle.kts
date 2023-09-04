@@ -12,5 +12,6 @@ buildscript {
     }
     dependencies {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion")
+        classpath("com.karumi:shot:6.0.0")
     }
 }
