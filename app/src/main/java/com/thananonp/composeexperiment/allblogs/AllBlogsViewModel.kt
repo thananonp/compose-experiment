@@ -24,13 +24,7 @@ class AllBlogsViewModel(
     var error by mutableStateOf<Error?>(null)
     var data by mutableStateOf<List<Blog>>(listOf())
 
-    override fun onCleared() {
-        super.onCleared()
-        Log.d("ViewModel", "viewModel Cleared")
-    }
-
-    fun getAllBlogs() {
-        Log.d("ViewModel", "viewModel Blogs")
+    fun getAllBlogs()  {
         viewModelScope.launch {
             isLoading = true
             error = null
@@ -40,6 +34,7 @@ class AllBlogsViewModel(
             } catch (e: Error) {
                 error = e
             }
+
             isLoading = false
 
         }
